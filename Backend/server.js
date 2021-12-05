@@ -9,15 +9,17 @@ const colors = require("colors");
 const errorHandler = require("./middleware/error");
 const cookieParser = require("cookie-parser");
 const passport = require("passport");
+const { graphqlHTTP } = require("express-graphql");
+var schema = require("./schema/schema");
 
 //load enc vars
-dotenv.config(({path: './config/config.env'}))
+dotenv.config({ path: "./config/config.env" });
 
 const app = express();
 
 //logger middleware
-if(process.env.NODE_ENV==='development'){
-  app.use(morgan('dev'));
+if (process.env.NODE_ENV === "development") {
+  app.use(morgan("dev"));
 }
 
 // parse requests of content-type: application/json
@@ -55,17 +57,25 @@ const restaurants = require("./routes/restaurants");
 const uploadImageS3 = require("./routes/uploadImageS3");
 
 //Mount routers
-app.use('/api/v1/auth', auth);
-app.use('/api/v1/dishes', dishes);
-app.use('/api/v1/orders', orders);
-app.use('/api/v1/deliveryAddresses', deliveryAddresses);
-app.use('/api/v1/favorites', favorites);
-app.use('/api/v1/users', users);
-app.use('/api/v1/restaurants', restaurants);
-app.use('/api/v1/uploadImageS3', uploadImageS3);
+app.use("/api/v1/auth", auth);
+app.use("/api/v1/dishes", dishes);
+app.use("/api/v1/orders", orders);
+app.use("/api/v1/deliveryAddresses", deliveryAddresses);
+app.use("/api/v1/favorites", favorites);
+app.use("/api/v1/users", users);
+app.use("/api/v1/restaurants", restaurants);
+app.use("/api/v1/uploadImageS3", uploadImageS3);
 
 //errorHandler middleware
 app.use(errorHandler);
+
+app.use(
+  "/graphql",
+  graphqlHTTP({
+    schema,
+    graphiql: true,
+  })
+);
 
 // set port, listen for requests
 app.listen(5001, () => {
