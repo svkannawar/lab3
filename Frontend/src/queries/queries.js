@@ -14,7 +14,7 @@ const getAllRests = gql`
   }
 `;
 const getUserProfile = gql`
-  query getUserProfile($id: String) {
+  query getUserProfile($id: ID) {
     getUserProfile(id: $id) {
       name
       location
@@ -29,7 +29,7 @@ const getUserProfile = gql`
   }
 `;
 const getOrderDetails = gql`
-  query getOrderDetails($id: String) {
+  query getOrderDetails($id: ID) {
     getOrderDetails(id: $id) {
       custid
       restid
@@ -47,7 +47,7 @@ const getOrderDetails = gql`
   }
 `;
 const getAllOrdersCustomer = gql`
-  query getAllOrdersCustomer($custid: String) {
+  query getAllOrdersCustomer($custid: ID) {
     getAllOrdersCustomer(custid: $custid) {
       custid
       restid
@@ -60,7 +60,7 @@ const getAllOrdersCustomer = gql`
 `;
 
 const getAllOrdersRestaurant = gql`
-  query getAllOrdersRestaurant($custid: String) {
+  query getAllOrdersRestaurant($custid: ID) {
     getAllOrdersRestaurant(custid: $custid) {
       custid
       restid
@@ -73,7 +73,7 @@ const getAllOrdersRestaurant = gql`
 `;
 
 const getRestAsFav = gql`
-  query getRestAsFav($custid: String, $restid: String) {
+  query getRestAsFav($custid: ID, $restid: ID) {
     getRestAsFav(custid: $custid, restid: $restid) {
       fav
     }
@@ -81,7 +81,7 @@ const getRestAsFav = gql`
 `;
 
 const getFavs = gql`
-  query getFavs($custid: String, $restid: String) {
+  query getFavs($custid: ID, $restid: ID) {
     getFavs(custid: $custid, restid: $restid) {
       custid
       restid
@@ -90,7 +90,7 @@ const getFavs = gql`
 `;
 
 const getDish = gql`
-  query getDish($id: String) {
+  query getDish($id: ID) {
     getDish(restid: $restid) {
       id
       restid

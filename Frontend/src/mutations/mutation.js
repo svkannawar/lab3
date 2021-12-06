@@ -37,7 +37,7 @@ const addDeliveryAddress = gql`
 `;
 const addDish = gql`
   mutation addDish(
-    $restid: String
+    $restid: ID
     $name: String
     $type: String
     $price: String
@@ -61,10 +61,10 @@ const addDish = gql`
 
 const editDish = gql`
   mutation editDish(
-    $restid: String
+    $restid: ID
     $name: String
     $type: String
-    $price: String
+    $price: INT
     $description: String
   ) {
     editDish(
@@ -83,7 +83,7 @@ const editDish = gql`
   }
 `;
 const addFavs = gql`
-  mutation addFavs($restid: String, $custid: String) {
+  mutation addFavs($restid: ID, $custid: ID) {
     addFavs(groupID: $restid, userID: $custid) {
       restid
       custid
@@ -93,12 +93,12 @@ const addFavs = gql`
 `;
 const addOrderDetails = gql`
   mutation addDish(
-    $custid: String
+    $custid: ID
     $custName: String
     $modeOfDelivery: String
     $total: INT
     $specialInstructions: String
-    $restid: String
+    $restid: ID
     $address: String
     $quantity: INT
     $uniqueItems: INT
@@ -128,7 +128,7 @@ const addOrderDetails = gql`
 `;
 
 const updateOrderStatus = gql`
-  mutation updateOrderStatus($orderid: String, $orderStatus: String) {
+  mutation updateOrderStatus($orderid: ID, $orderStatus: String) {
     updateOrderStatus(orderid: $orderid, orderStatus: $orderStatus) {
       orderid
       orderStatus
